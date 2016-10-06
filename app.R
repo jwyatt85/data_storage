@@ -3,30 +3,31 @@ library(shiny)
 library(shinydashboard)
 
 # Define the fields we want to save from the form
-fields <- c("name", "used_shiny", "r_num_years")
+fields <- c("qtext", "randomize", "response_options")
 
 # Shiny app with 3 fields that the user can submit data for
 shinyApp(
   ui = fluidPage(
-    titlePanel("Hello Shiny!"),
+    titlePanel("Survey Development"),
     
     sidebarLayout(
       sidebarPanel(
-        textInput("name", "Name", ""),
-        checkboxInput("used_shiny", "I've built a Shiny app in R before", FALSE),
-        sliderInput("r_num_years", "Number of years using R",
+        tags$textarea(id="qtext", rows=5, cols=40, "Question Text Here!"),
+        checkboxInput("randomize", "Randomize Response Options", FALSE),
+        sliderInput("response_options", "Number of Response Options",
                     0, 25, 2, ticks = FALSE),
         actionButton("submit", "Submit")
       ),
       
       mainPanel(
         DT::dataTableOutput("responses", width = 700), tags$hr(),
-        downloadButton('downloadData', 'Download')
+        downloadButton('downloadData', 'Download QSF')
       )
     )
   ),
     
     server = function(input, output, session) {
+      
       
       outputDir <- "~/Documents/git_repos/data_storage/data/"
       
