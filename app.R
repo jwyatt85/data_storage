@@ -8,9 +8,9 @@ fields <- c("qtext", "MC","MA", "MT", "response_options", "block_name")
 # Shiny app with 3 fields that the user can submit data for
 shinyApp(
   ui = fluidPage(
-    titlePanel(title=(div("Survey Platform",
+    titlePanel(title=(div("MC Survey Platform  ",
       img(
-        src="mc2.jpg", height = 50, width = 50
+        src="mc2.jpg", height = 40, width = 40
       )))),
     
     sidebarLayout(
