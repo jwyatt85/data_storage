@@ -45,6 +45,21 @@ survey_output(
   location       = file.path("~/Desktop/output.txt")
 )
   
-  
 
+data <- readr::read_csv("~/Desktop/totalform.csv")
+x <- data$response_options[1]
+x <- unlist(strsplit(x, ","))
 
+trim <- function (x) gsub("^\\s+|\\s+$", "", x)
+
+answers <- trim(x)
+
+x <- unlist(strsplit(x, ","))
+
+survey_output(
+  format         = "MA", 
+  qid            = "q1",
+  qtext          = c("This is a multiple choice question"), 
+  answer_choices = answers, 
+  location       = file.path("~/Desktop/output.txt")
+)
