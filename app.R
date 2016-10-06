@@ -27,7 +27,7 @@ shinyApp(
     
     server = function(input, output, session) {
       
-      outputDir <- "/Users/JamesWyatt1/Documents/git_repos/data_storage/data/"
+      outputDir <- "~/Documents/git_repos/data_storage/data/"
       
       saveData <- function(data) {
         data <- t(data)
