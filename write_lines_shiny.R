@@ -42,7 +42,7 @@ survey_output(
   qid            = "q1",
   qtext          = c("This is a multiple choice question"), 
   answer_choices = c("test1", "test2", "test3"), 
-  location       = file.path("~/Desktop/output.text")
+  location       = file.path("~/Desktop/output.txt")
 )
   
   
