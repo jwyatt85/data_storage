@@ -8,19 +8,23 @@ fields <- c("qtext", "MC","MA", "MT", "response_options", "block_name")
 # Shiny app with 3 fields that the user can submit data for
 shinyApp(
   ui = fluidPage(
-    titlePanel("Survey Development"),
+    titlePanel(title=(div("Survey Platform",
+      img(
+        src="mc2.jpg", height = 50, width = 50
+      )))),
     
     sidebarLayout(
       sidebarPanel(
         textInput("block_name", "Block Name", "BP1"),
+
         
         tags$textarea(id="qtext", rows=5, cols=45, "Question Text Here!"),
         
         checkboxInput("MC", "Multiple Choice", FALSE),
         checkboxInput("MA", "Multiple Answer", FALSE),
         checkboxInput("MT", "Matrix", FALSE),
-        sliderInput("response_options", "Number of Response Options",
-                    0, 25, 2, ticks = FALSE),
+        h4("Response options comma delimited "),
+        tags$textarea(id="response_options", rows=5, cols=45, "Question Text Here!"),
         actionButton("submit", "Submit")
       ),
       
