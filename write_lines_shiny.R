@@ -33,7 +33,7 @@ survey_output <- function(format, qid, qtext, answer_choices, location){
             "[[Choices]]", 
             cbind(my_survey_list[[5]]))
   
-  cat(text, sep = '\n', file = "~/Desktop/output.txt", append = TRUE)
+  cat(text, sep = '\n', file = location, append = TRUE)
   
 }
   
@@ -48,21 +48,3 @@ survey_output(
   
 
 
-
-
-
-
-
-fileConn <- file("~/Desktop/output.txt")
-write("[This is advanced]", append=TRUE, fileConn)
-close(fileConn)
-
-fileConn <- file("~/Desktop/output.txt")
-write(c(paste0(num[1], ".", " ", "Q-text..."),
-             " ",
-             "a",
-             "b", 
-             "c"), append=TRUE, fileConn)
-close(fileConn)
-
-close(fileConn)
