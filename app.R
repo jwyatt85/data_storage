@@ -20,7 +20,8 @@ shinyApp(
       ),
       
       mainPanel(
-        DT::dataTableOutput("responses", width = 300), tags$hr()
+        DT::dataTableOutput("responses", width = 700), tags$hr(),
+        downloadButton('downloadData', 'Download')
       )
     )
   ),
@@ -66,6 +67,13 @@ shinyApp(
     output$responses <- DT::renderDataTable({
       input$submit
       loadData()
-    })     
+    })
+    
+    output$downloadData <- downloadHandler(
+      filename = function() {paste("totalform", '.csv', sep='') },
+      content = function(file) {
+        readr::write_csv(loadData(), file)
+      }
+    )
   }
 )
