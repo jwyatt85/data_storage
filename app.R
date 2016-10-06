@@ -3,7 +3,7 @@ library(shiny)
 library(shinydashboard)
 
 # Define the fields we want to save from the form
-fields <- c("qtext", "randomize", "response_options")
+fields <- c("qtext", "randomize", "response_options", "block_name")
 
 # Shiny app with 3 fields that the user can submit data for
 shinyApp(
@@ -12,7 +12,10 @@ shinyApp(
     
     sidebarLayout(
       sidebarPanel(
-        tags$textarea(id="qtext", rows=5, cols=40, "Question Text Here!"),
+        textInput("block_name", "Block Name", "BP1"),
+        
+        tags$textarea(id="qtext", rows=5, cols=45, "Question Text Here!"),
+        
         checkboxInput("randomize", "Randomize Response Options", FALSE),
         sliderInput("response_options", "Number of Response Options",
                     0, 25, 2, ticks = FALSE),
