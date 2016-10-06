@@ -15,16 +15,19 @@ shinyApp(
     
     sidebarLayout(
       sidebarPanel(
-        textInput("block_name", "Block Name", "BP1"),
+        textInput("block_name", "Block Name", "BP"),
+        textInput("qid", "Question ID", "BP1"),
 
-        
-        tags$textarea(id="qtext", rows=5, cols=45, "Question Text Here!"),
+        h4("Question Text: "),
+        tags$textarea(id="qtext", rows=5, cols=45, ""),
         
         checkboxInput("MC", "Multiple Choice", FALSE),
         checkboxInput("MA", "Multiple Answer", FALSE),
         checkboxInput("MT", "Matrix", FALSE),
-        h4("Response options comma delimited "),
+        
+        h4("Response options: comma delimited "),
         tags$textarea(id="response_options", rows=5, cols=45, "Question Text Here!"),
+        hr(),
         actionButton("submit", "Submit")
       ),
       
