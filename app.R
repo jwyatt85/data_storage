@@ -26,7 +26,7 @@ shinyApp(
         checkboxInput("MT", "Matrix", FALSE),
         
         h4("Response options: comma delimited "),
-        tags$textarea(id="response_options", rows=5, cols=45, "Question Text Here!"),
+        tags$textarea(id="response_options", rows=5, cols=45, "answer1, answer2, answer3"),
         hr(),
         actionButton("submit", "Submit")
       ),

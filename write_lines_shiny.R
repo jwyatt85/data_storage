@@ -53,7 +53,6 @@ x <- unlist(strsplit(x, ","))
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
 answers <- trim(x)
-
 x <- unlist(strsplit(x, ","))
 
 survey_output(
