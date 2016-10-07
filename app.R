@@ -28,11 +28,13 @@ shinyApp(
         h4("Response options: comma delimited "),
         tags$textarea(id="response_options", rows=5, cols=45, "answer1, answer2, answer3"),
         hr(),
-        actionButton("submit", "Submit")
+        actionButton("submit", "Submit"), 
+        hr(),
+        actionButton("delete_last", "Delete last entry"),h5("then refresh")
       ),
       
       mainPanel(
-        DT::dataTableOutput("responses", width = 700), tags$hr(),
+        DT::dataTableOutput("responses", width = 900), tags$hr(),
         downloadButton('downloadData', 'Download QSF')
       )
     )
@@ -73,6 +75,12 @@ shinyApp(
     # When the Submit button is clicked, save the form data
     observeEvent(input$submit, {
       saveData(formData())
+    })
+    
+    observeEvent(input$delete_last, {
+      files <- list.files(outputDir, full.names = TRUE)
+      num <- NROW(files)
+      file.remove(files[2])
     })
     
     # Show the previous responses
