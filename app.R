@@ -1,6 +1,7 @@
 
 library(shiny)
 library(shinydashboard)
+library(shinyjs)
 
 # Define the fields we want to save from the form
 fields <- c("qtext", "MC","MA", "MT", "response_options", "block_name")
@@ -8,6 +9,7 @@ fields <- c("qtext", "MC","MA", "MT", "response_options", "block_name")
 # Shiny app with 3 fields that the user can submit data for
 shinyApp(
   ui = fluidPage(
+    shinyjs::useShinyjs(),
     titlePanel(title=(div("MC Survey Platform  ",
       img(
         src="mc2.jpg", height = 40, width = 40
@@ -15,27 +17,28 @@ shinyApp(
     
     sidebarLayout(
       sidebarPanel(
-        textInput("block_name", "Block Name", "BP"),
-        textInput("qid", "Question ID", "BP1"),
-
-        h4("Question Text: "),
-        tags$textarea(id="qtext", rows=5, cols=45, ""),
-        
-        checkboxInput("MC", "Multiple Choice", FALSE),
-        checkboxInput("MA", "Multiple Answer", FALSE),
-        checkboxInput("MT", "Matrix", FALSE),
-        
-        h4("Response options: comma delimited "),
-        tags$textarea(id="response_options", rows=5, cols=45, "answer1, answer2, answer3"),
-        hr(),
-        actionButton("submit", "Submit"), 
-        hr(),
-        actionButton("delete_last", "Delete last entry"),h5("then refresh")
+          textInput("block_name", "Block Name", "BP"),
+          textInput("qid", "Question ID", "BP1"),
+          
+          h4("Question Text: "),
+          tags$textarea(id="qtext", rows=5, cols=45, ""),
+          
+          checkboxInput("MC", "Multiple Choice", FALSE),
+          checkboxInput("MA", "Multiple Answer", FALSE),
+          checkboxInput("MT", "Matrix", FALSE),
+          
+          h4("Response options: comma delimited "),
+          tags$textarea(id="response_options", rows=5, cols=45, "answer1, answer2, answer3"),
+          hr(),
+          actionButton("submit", "Submit"), 
+          hr(),
+          actionButton("delete_last", "Delete last entry")
       ),
       
       mainPanel(
-        DT::dataTableOutput("responses", width = 900), tags$hr(),
-        downloadButton('downloadData', 'Download QSF')
+          id = "main_form",
+          DT::dataTableOutput("responses", width = 900), tags$hr(),
+          downloadButton('downloadData', 'Download QSF')
       )
     )
   ),
@@ -80,7 +83,7 @@ shinyApp(
     observeEvent(input$delete_last, {
       files <- list.files(outputDir, full.names = TRUE)
       num <- NROW(files)
-      file.remove(files[2])
+      file.remove(files[num])
     })
     
     # Show the previous responses
